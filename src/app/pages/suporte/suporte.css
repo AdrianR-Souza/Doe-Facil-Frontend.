@@ -1,0 +1,82 @@
+.page {
+  background: white;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.header {
+  background: #8B1A1A;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.opcao:hover {
+  background: #fff5f5;
+  border-color: #8B1A1A;
+}
+
+.opcao-icon {
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  background: #fff5f5;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.opcao-titulo {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.opcao-sub {
+  font-size: 13px;
+  color: #888;
+}
+
+.horario {
+  background: #8B1A1A;
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.horario-titulo {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.horario-sub {
+  font-size: 13px;
+  opacity: 0.8;
+}

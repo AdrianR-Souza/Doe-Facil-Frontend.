@@ -1,0 +1,125 @@
+<div class="page">
+  <header class="header">
+    <span routerLink="/">◀</span>
+    <h1>Meu painel</h1>
+    <span>☰</span>
+  </header>
+
+  <div class="content">
+
+    <div class="form-group">
+      <label>Buscar doador</label>
+      <input
+        type="text"
+        [(ngModel)]="buscaDoador"
+        (input)="buscarDoador()"
+        placeholder="Digite seu nome..."
+      />
+      @if (doadoresFiltrados.length > 0) {
+        <div class="dropdown">
+          @for (d of doadoresFiltrados; track d.id) {
+            <div class="dropdown-item" (click)="selecionarDoador(d)">
+              {{ d.nome }}
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    @if (doadorSelecionado) {
+
+      <div class="total-card">
+        <div class="total-label">Total doado</div>
+        <div class="total-valor">R$ {{ totalDoado | number:'1.2-2' }}</div>
+        <div class="total-sub">{{ pedidos.length }} doações realizadas</div>
+      </div>
+
+      <div class="abas">
+        <button [class.ativa]="abaSelecionada === 'painel'" (click)="abaSelecionada = 'painel'">Painel</button>
+        <button [class.ativa]="abaSelecionada === 'historico'" (click)="abaSelecionada = 'historico'">Histórico</button>
+      </div>
+
+      @if (abaSelecionada === 'painel') {
+        <div class="menu-list">
+          <div class="menu-item" routerLink="/perfil">
+            <span class="menu-icon">👤</span>
+            <span>Minha conta</span>
+            <span class="arrow">›</span>
+          </div>
+          <div class="menu-item" routerLink="/nova-doacao">
+            <span class="menu-icon">❤️</span>
+            <span>Nova doação</span>
+            <span class="arrow">›</span>
+          </div>
+          <div class="menu-item" routerLink="/suporte">
+            <span class="menu-icon">🎧</span>
+            <span>Suporte</span>
+            <span class="arrow">›</span>
+          </div>
+          <div class="menu-item" routerLink="/faq">
+            <span class="menu-icon">❓</span>
+            <span>Tire suas dúvidas</span>
+            <span class="arrow">›</span>
+          </div>
+        </div>
+      }
+
+      @if (abaSelecionada === 'historico') {
+        @if (pedidos.length === 0) {
+          <div class="empty">
+            <div>📦</div>
+            <p>Nenhum pedido encontrado</p>
+          </div>
+        }
+        @for (p of pedidos; track p.id) {
+          <div class="pedido-card">
+            <div class="pedido-header" (click)="togglePedido(p.id)">
+              <div class="pedido-info">
+                <div class="pedido-nome">Pedido #{{ p.id }}</div>
+                <div class="pedido-valor">R$ {{ getTotalPedido(p) | number:'1.2-2' }}</div>
+              </div>
+              <div class="pedido-acoes">
+                <span class="pedido-arrow">{{ pedidoAberto === p.id ? '▲' : '▼' }}</span>
+                <button class="btn-editar" (click)="$event.stopPropagation(); alterarPedido(p)">✏️</button>
+              </div>
+            </div>
+
+            @if (pedidoAberto === p.id) {
+              <div class="pedido-resumo">
+                <div class="resumo-row">
+                  <span class="resumo-label">Produtos</span>
+                  <span>{{ getNomeProdutos(p) }}</span>
+                </div>
+                <div class="resumo-row">
+                  <span class="resumo-label">Instituição</span>
+                  <span>ID: {{ p.id_instituicao }}</span>
+                </div>
+                <div class="resumo-row">
+                  <span class="resumo-label">Método de pagamento</span>
+                  <span>{{ p.id_metodo_pgto === 1 ? 'PIX' : p.id_metodo_pgto === 2 ? 'Cartão de Crédito' : 'Boleto' }}</span>
+                </div>
+                <div class="resumo-row">
+                  <span class="resumo-label">Total</span>
+                  <span class="resumo-valor">R$ {{ getTotalPedido(p) | number:'1.2-2' }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      }
+
+      @if (mensagem) {
+        <div class="mensagem">{{ mensagem }}</div>
+      }
+
+    }
+
+    @if (!doadorSelecionado) {
+      <div class="empty">
+        <div>🔍</div>
+        <p>Busque seu nome para ver seu painel</p>
+      </div>
+    }
+
+  </div>
+</div>

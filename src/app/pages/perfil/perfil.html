@@ -1,0 +1,92 @@
+<div class="page">
+  <header class="header">
+    <span routerLink="/painel">◀</span>
+    <h1>Minha conta</h1>
+    <span>☰</span>
+  </header>
+
+  <div class="content">
+
+    <div class="form-group">
+      <label>Buscar seu perfil</label>
+      <input
+        type="text"
+        [(ngModel)]="buscaDoador"
+        (input)="buscarDoador()"
+        placeholder="Digite seu nome..."
+      />
+      @if (doadoresFiltrados.length > 0) {
+        <div class="dropdown">
+          @for (d of doadoresFiltrados; track d.id) {
+            <div class="dropdown-item" (click)="selecionarDoador(d)">
+              {{ d.nome }}
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    @if (doadorSelecionado) {
+      <div class="avatar">
+        <div class="avatar-circle">{{ doadorSelecionado.nome[0] }}</div>
+        <div class="avatar-nome">{{ doadorSelecionado.nome }}</div>
+        <div class="avatar-email">{{ doadorSelecionado.email }}</div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-row">
+          <label>Nome completo</label>
+          @if (editando) {
+            <input [(ngModel)]="doadorSelecionado.nome" />
+          } @else {
+            <span>{{ doadorSelecionado.nome }}</span>
+          }
+        </div>
+        <div class="info-row">
+          <label>E-mail</label>
+          @if (editando) {
+            <input [(ngModel)]="doadorSelecionado.email" />
+          } @else {
+            <span>{{ doadorSelecionado.email }}</span>
+          }
+        </div>
+        <div class="info-row">
+          <label>Telefone</label>
+          @if (editando) {
+            <input [(ngModel)]="doadorSelecionado.telefone" />
+          } @else {
+            <span>{{ doadorSelecionado.telefone }}</span>
+          }
+        </div>
+        <div class="info-row">
+          <label>Cidade</label>
+          @if (editando) {
+            <input [(ngModel)]="doadorSelecionado.cidade" />
+          } @else {
+            <span>{{ doadorSelecionado.cidade }}</span>
+          }
+        </div>
+      </div>
+
+      @if (mensagem) {
+        <div class="mensagem" [class.erro]="!mensagem.includes('sucesso')">{{ mensagem }}</div>
+      }
+
+      @if (!editando) {
+        <button class="btn-editar" (click)="editando = true">Editar dados</button>
+        <button class="btn-excluir" (click)="excluir()">Excluir cadastro</button>
+      } @else {
+        <button class="btn-salvar" (click)="salvar()">Salvar alterações</button>
+        <button class="btn-cancelar" (click)="editando = false">Cancelar</button>
+      }
+    }
+
+    @if (!doadorSelecionado) {
+      <div class="empty">
+        <div>👤</div>
+        <p>Busque seu nome para ver seu perfil</p>
+      </div>
+    }
+
+  </div>
+</div>

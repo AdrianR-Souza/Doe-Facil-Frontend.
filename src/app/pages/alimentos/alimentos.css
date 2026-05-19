@@ -1,0 +1,66 @@
+.page {
+  background: white;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.header {
+  background: #8B1A1A;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.search-bar {
+  padding: 12px 16px;
+  background: #f5f5f5;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #888;
+  border-bottom: 1px solid #eee;
+}
+
+.lista {
+  padding: 0 16px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.item:hover {
+  background: #fff5f5;
+}
+
+.preco {
+  background: #8B1A1A;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+}

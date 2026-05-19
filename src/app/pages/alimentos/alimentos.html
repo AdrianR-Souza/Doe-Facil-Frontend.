@@ -1,0 +1,28 @@
+<div class="page">
+  <header class="header">
+    <span routerLink="/">◀</span>
+    <h1>Alimentos</h1>
+    <span>☰</span>
+  </header>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Busque pelo alimento..."
+      [(ngModel)]="busca"
+    />
+  </div>
+
+  <div class="table-header">
+    <span>Nome do alimento</span>
+    <span>Valor</span>
+  </div>
+
+  <div class="lista">
+    @for (p of produtosFiltrados; track p.id) {
+      <div class="item" routerLink="/nova-doacao">
+        <span>{{ p.nome }}</span>
+        <span class="preco">R$ {{ p.preco | number:'1.2-2' }}</span>      </div>
+    }
+  </div>
+</div>

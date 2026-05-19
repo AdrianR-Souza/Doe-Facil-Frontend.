@@ -1,0 +1,82 @@
+<div class="page">
+
+  @if (menuAberto) {
+    <div class="overlay" (click)="menuAberto = false"></div>
+  }
+
+  <!-- MENU LATERAL -->
+  <div class="menu-lateral" [class.aberto]="menuAberto">
+    <div class="menu-topo">
+      <span class="menu-titulo">DOE + FÁCIL</span>
+      <span class="menu-fechar" (click)="menuAberto = false">✕</span>
+    </div>
+    <div class="menu-items">
+      <div class="menu-item-lateral" (click)="navegarPara('/')">
+        <span>🏠</span><span>Início</span>
+      </div>
+      <div class="menu-item-lateral" (click)="navegarPara('/alimentos')">
+        <span>🛒</span><span>Doe Agora</span>
+      </div>
+      <div class="menu-item-lateral" (click)="navegarPara('/painel')">
+        <span>👤</span><span>Meu Painel</span>
+      </div>
+      <div class="menu-item-lateral" (click)="navegarPara('/cadastro')">
+        <span>📝</span><span>Cadastro</span>
+      </div>
+      <div class="menu-item-lateral" (click)="navegarPara('/suporte')">
+        <span>🎧</span><span>Suporte</span>
+      </div>
+      <div class="menu-item-lateral" (click)="navegarPara('/faq')">
+        <span>❓</span><span>FAQ</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-header">
+      <span class="menu-icon" (click)="menuAberto = true">☰</span>
+      <span class="logo"></span>
+      <div class="avatar" routerLink="/painel">M</div>
+    </div>
+
+    <div class="hero-text">
+      <p class="bem-vindo"></p>
+      <h1>DOE + FÁCIL</h1>
+    </div>
+
+    <div class="hero-card" routerLink="/alimentos">
+      <div class="basket">🧺</div>
+      <button class="btn-doe">Clique aqui para doar</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="cesta-card" routerLink="/alimentos">
+      <div class="cesta-icon">🛒</div>
+      <div class="cesta-info">
+        <div class="cesta-titulo">Monte sua cesta básica</div>
+        <div class="cesta-sub">Escolha os alimentos que deseja doar e ajude famílias que precisam.</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-valor">{{ totalDoacoes }}</div>
+        <div class="stat-label">Doações feitas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-valor">{{ totalOngs }}</div>
+        <div class="stat-label">ONGs parceiras</div>
+      </div>
+    </div>
+
+    <div class="ajude-card" routerLink="/alimentos">
+      <div class="ajude-icon">👥</div>
+      <div class="ajude-titulo">Ajude quem mais precisa</div>
+      <div class="ajude-sub">Sua doação transforma vidas</div>
+      <button class="btn-comecar" routerLink="/alimentos">Começar agora →</button>
+    </div>
+
+  </div>
+</div>

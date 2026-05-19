@@ -1,0 +1,217 @@
+.page {
+  background: white;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.header {
+  background: #8B1A1A;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background: #f0f0f0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tag.ativo {
+  background: #8B1A1A;
+  color: white;
+}
+
+.resumo {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resumo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  gap: 12px;
+}
+
+.resumo-item span:first-child {
+  flex: 1;
+}
+
+.resumo-item span:last-child {
+  min-width: 70px;
+  text-align: right;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.total-valor {
+  color: #8B1A1A;
+  font-size: 18px;
+}
+
+.mensagem {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.btn-confirmar {
+  background: #8B1A1A;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-confirmar:hover {
+  background: #5C0F0F;
+}
+.dropdown {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-item:hover {
+  background: #fff5f5;
+  color: #8B1A1A;
+}
+
+.doador-selecionado {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #2e7d32;
+  font-weight: 600;
+}
+.tela-sucesso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 40px 20px;
+  background: #fff5f5;
+  border-radius: 16px;
+  border: 1px solid #f5c0c0;
+}
+
+.sucesso-icon {
+  font-size: 72px;
+}
+
+.tela-sucesso h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #8B1A1A;
+}
+
+.tela-sucesso p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.sucesso-sub {
+  font-size: 13px;
+  color: #8B1A1A;
+  font-weight: 600;
+}
+.mensagem.erro {
+  background: #fdecea;
+  color: #8B1A1A;
+}
+.nao-encontrado {
+  background: #fff5f5;
+  border: 1px solid #f5c0c0;
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+
+.nao-encontrado p {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.btn-cadastrar {
+  background: #8B1A1A;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: sans-serif;
+}

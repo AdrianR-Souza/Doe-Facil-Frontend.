@@ -1,0 +1,50 @@
+<div class="page">
+  <header class="header">
+    <span routerLink="/nova-doacao">◀</span>
+    <h1>Pagamento</h1>
+    <span>☰</span>
+  </header>
+
+  <div class="content">
+
+    @if (!confirmado) {
+      <div class="titulo">Finalize suas doação</div>
+
+      <div class="metodos">
+        <div class="metodo" [class.ativo]="metodoSelecionado === 1" (click)="metodoSelecionado = 1">
+          <input type="radio" [checked]="metodoSelecionado === 1" />
+          <span>PIX</span>
+        </div>
+        <div class="metodo" [class.ativo]="metodoSelecionado === 2" (click)="metodoSelecionado = 2">
+          <input type="radio" [checked]="metodoSelecionado === 2" />
+          <span>Cartão de crédito</span>
+        </div>
+        <div class="metodo" [class.ativo]="metodoSelecionado === 3" (click)="metodoSelecionado = 3">
+          <input type="radio" [checked]="metodoSelecionado === 3" />
+          <span>Boleto</span>
+        </div>
+      </div>
+
+      @if (metodoSelecionado === 1) {
+        <div class="qrcode">
+          <div class="qrcode-box">QR Code PIX</div>
+          <button class="btn-copiar" (click)="confirmar()">Copiar QR Code</button>
+        </div>
+      }
+
+      @if (metodoSelecionado === 2 || metodoSelecionado === 3) {
+        <button class="btn-confirmar" (click)="confirmar()">Confirmar pagamento</button>
+      }
+    }
+
+    @if (confirmado) {
+      <div class="sucesso">
+        <div class="sucesso-icon">✅</div>
+        <h2>Pagamento confirmado!</h2>
+        <p>{{ mensagem }}</p>
+        <button class="btn-confirmar" routerLink="/">Voltar ao início</button>
+      </div>
+    }
+
+  </div>
+</div>

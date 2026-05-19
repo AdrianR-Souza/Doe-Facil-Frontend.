@@ -1,0 +1,105 @@
+<div class="page">
+  <header class="header">
+    <span routerLink="/alimentos">◀</span>
+    <h1>Nova doação</h1>
+    <span>☰</span>
+  </header>
+
+  <div class="content">
+
+    <div class="form-group">
+      <label>Buscar doador pelo nome</label>
+      <input
+        type="text"
+        [(ngModel)]="buscaDoador"
+        (input)="buscarDoador()"
+        placeholder="Digite o nome do doador..."
+      />
+      @if (doadoresFiltrados.length > 0) {
+        <div class="dropdown">
+          @for (d of doadoresFiltrados; track d.id) {
+            <div class="dropdown-item" (click)="selecionarDoador(d)">
+              {{ d.nome }}
+            </div>
+          }
+        </div>
+      }
+      @if (buscaDoador.length >= 2 && doadoresFiltrados.length === 0 && !doadorSelecionado) {
+        <div class="nao-encontrado">
+          <p>Doador não encontrado.</p>
+          <button class="btn-cadastrar" routerLink="/cadastro">Cadastre-se aqui</button>
+        </div>
+      }
+      @if (doadorSelecionado) {
+        <div class="doador-selecionado">✅ {{ doadorSelecionado.nome }} — ID: {{ doadorSelecionado.id }}</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Alimentos selecionados</label>
+      <div class="tags">
+        @for (p of produtos; track p.id) {
+          <span class="tag" [class.ativo]="isSelecionado(p)" (click)="selecionarProduto(p)">
+            {{ p.nome }}
+          </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Instituição</label>
+      <select [(ngModel)]="instituicaoSelecionada">
+        <option value="0">Selecione...</option>
+        @for (i of instituicoes; track i.id) {
+          <option [value]="i.id">{{ i.nome_fantasia }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Método de pagamento</label>
+      <select [(ngModel)]="metodo">
+        <option value="1">PIX</option>
+        <option value="2">Cartão de Crédito</option>
+        <option value="3">Boleto</option>
+      </select>
+    </div>
+
+    <div class="resumo">
+      @for (p of produtosSelecionados; track p.id) {
+        <div class="resumo-item">
+          <span>{{ p.nome }}</span>
+          <div class="quantidade-control">
+            <button (click)="p.quantidade > 1 ? p.quantidade = p.quantidade - 1 : null">−</button>
+            <span>{{ p.quantidade }}</span>
+            <button (click)="p.quantidade = p.quantidade + 1">+</button>
+          </div>
+          <span>R$ {{ (p.preco * p.quantidade) | number:'1.2-2' }}</span>
+        </div>
+      }
+      <div class="total">
+        <span>Total</span>
+        <span class="total-valor">R$ {{ total | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+    @if (mensagem) {
+      <div class="mensagem" [class.erro]="!mensagem.includes('sucesso')">{{ mensagem }}</div>
+    }
+
+    @if (mensagem.includes('sucesso')) {
+      <div class="tela-sucesso">
+        <div class="sucesso-icon">❤️</div>
+        <h2>Obrigado pela sua doação!</h2>
+        <p>Sua doação foi realizada com sucesso e já está a caminho de quem mais precisa.</p>
+        <p class="sucesso-sub">Você fez a diferença hoje!</p>
+        <button class="btn-confirmar" routerLink="/">Voltar ao início</button>
+      </div>
+    }
+
+    @if (!mensagem.includes('sucesso')) {
+      <button class="btn-confirmar" (click)="confirmar()">Confirmar doação</button>
+    }
+
+  </div>
+</div>

@@ -1,0 +1,256 @@
+.page {
+  background: white;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.header {
+  background: #8B1A1A;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.dropdown {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-item:hover {
+  background: #fff5f5;
+  color: #8B1A1A;
+}
+
+.total-card {
+  background: #8B1A1A;
+  color: white;
+  border-radius: 16px;
+  padding: 28px;
+  text-align: left;
+}
+
+.total-label {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.total-valor {
+  font-size: 42px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.total-sub {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: #fff5f5;
+}
+
+.menu-icon {
+  font-size: 20px;
+  width: 32px;
+  text-align: center;
+}
+
+.arrow {
+  margin-left: auto;
+  color: #8B1A1A;
+  font-size: 20px;
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #aaa;
+  font-size: 32px;
+}
+
+.empty p {
+  font-size: 15px;
+  margin-top: 12px;
+  color: #888;
+}
+.abas {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0;
+}
+
+.abas button {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+
+.abas button.ativa {
+  color: #8B1A1A;
+  border-bottom: 2px solid #8B1A1A;
+}
+
+.pedido-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+}
+
+.pedido-nome {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.pedido-id {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.btn-editar {
+  background: #fff3e0;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-editar:hover {
+  background: #ff9800;
+}
+
+.btn-deletar:hover {
+  background: #f44336;
+}
+
+.mensagem {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.pedido-acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pedido-arrow {
+  font-size: 12px;
+  color: #888;
+}
+
+.pedido-valor {
+  font-size: 13px;
+  color: #8B1A1A;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.pedido-resumo {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resumo-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #333;
+}
+
+.resumo-label {
+  color: #888;
+  font-weight: 500;
+}
+
+.resumo-valor {
+  color: #8B1A1A;
+  font-weight: bold;
+}

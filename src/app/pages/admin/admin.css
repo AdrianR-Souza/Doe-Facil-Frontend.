@@ -1,0 +1,171 @@
+.page {
+  background: white;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.header {
+  background: #8B1A1A;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.content {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-card {
+  background: #f9f9f9;
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.login-icon {
+  font-size: 48px;
+}
+
+.login-card h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+}
+
+.login-card p {
+  font-size: 14px;
+  color: #888;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #8B1A1A;
+}
+
+.btn-entrar {
+  background: #8B1A1A;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+.btn-entrar:hover {
+  background: #5C0F0F;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #8B1A1A;
+  border-bottom: 2px solid #8B1A1A;
+  padding-bottom: 8px;
+}
+
+.btn-adicionar {
+  background: #8B1A1A;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+.btn-adicionar:hover {
+  background: #5C0F0F;
+}
+
+.produto-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+
+.produto-nome {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.produto-detalhe {
+  font-size: 12px;
+  color: #888;
+}
+
+.btn-deletar {
+  background: #fdecea;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-deletar:hover {
+  background: #8B1A1A;
+}
+
+.mensagem {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.mensagem.sucesso {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.mensagem.erro {
+  background: #fdecea;
+  color: #8B1A1A;
+}
