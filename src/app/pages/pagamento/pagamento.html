@@ -8,7 +8,15 @@
   <div class="content">
 
     @if (!confirmado) {
-      <div class="titulo">Finalize suas doação</div>
+
+      @if (pedidoPendente) {
+        <div class="resumo-card">
+          <div class="resumo-label">Total a pagar</div>
+          <div class="resumo-valor">R$ {{ pedidoPendente.total | number:'1.2-2' }}</div>
+        </div>
+      }
+
+      <div class="section-title">Forma de pagamento</div>
 
       <div class="metodos">
         <div class="metodo" [class.ativo]="metodoSelecionado === 1" (click)="metodoSelecionado = 1">
@@ -35,13 +43,18 @@
       @if (metodoSelecionado === 2 || metodoSelecionado === 3) {
         <button class="btn-confirmar" (click)="confirmar()">Confirmar pagamento</button>
       }
+
+      @if (mensagem) {
+        <div class="mensagem erro">{{ mensagem }}</div>
+      }
     }
 
     @if (confirmado) {
       <div class="sucesso">
-        <div class="sucesso-icon">✅</div>
-        <h2>Pagamento confirmado!</h2>
-        <p>{{ mensagem }}</p>
+        <div class="sucesso-icon">❤️</div>
+        <h2>Obrigado pela sua doação!</h2>
+        <p>Sua doação foi realizada com sucesso e já está a caminho de quem mais precisa.</p>
+        <p class="sucesso-sub">Você fez a diferença hoje!</p>
         <button class="btn-confirmar" routerLink="/">Voltar ao início</button>
       </div>
     }

@@ -1,3 +1,4 @@
+```html
 <div class="page">
   <header class="header">
     <span routerLink="/alimentos">◀</span>
@@ -56,15 +57,6 @@
       </select>
     </div>
 
-    <div class="form-group">
-      <label>Método de pagamento</label>
-      <select [(ngModel)]="metodo">
-        <option value="1">PIX</option>
-        <option value="2">Cartão de Crédito</option>
-        <option value="3">Boleto</option>
-      </select>
-    </div>
-
     <div class="resumo">
       @for (p of produtosSelecionados; track p.id) {
         <div class="resumo-item">
@@ -87,19 +79,7 @@
       <div class="mensagem" [class.erro]="!mensagem.includes('sucesso')">{{ mensagem }}</div>
     }
 
-    @if (mensagem.includes('sucesso')) {
-      <div class="tela-sucesso">
-        <div class="sucesso-icon">❤️</div>
-        <h2>Obrigado pela sua doação!</h2>
-        <p>Sua doação foi realizada com sucesso e já está a caminho de quem mais precisa.</p>
-        <p class="sucesso-sub">Você fez a diferença hoje!</p>
-        <button class="btn-confirmar" routerLink="/">Voltar ao início</button>
-      </div>
-    }
-
-    @if (!mensagem.includes('sucesso')) {
-      <button class="btn-confirmar" (click)="confirmar()">Confirmar doação</button>
-    }
+    <button class="btn-confirmar" (click)="confirmar()">Confirmar doação</button>
 
   </div>
 </div>

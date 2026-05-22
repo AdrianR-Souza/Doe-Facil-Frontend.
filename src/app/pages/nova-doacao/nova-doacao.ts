@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProdutoService } from '../../services/produto';
 import { InstituicaoService } from '../../services/instituicao';
@@ -24,7 +24,6 @@ export class NovaDoacao implements OnInit {
   idDoador: number = 0;
   buscaDoador: string = '';
   doadorSelecionado: any = null;
-  metodo: number = 1;
   mensagem: string = '';
   pedidoEditando: number | null = null;
 
@@ -34,6 +33,7 @@ export class NovaDoacao implements OnInit {
     private pedidoService: PedidoService,
     private pagamentoService: PagamentoService,
     private doadorService: DoadorService,
+    private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -57,7 +57,6 @@ export class NovaDoacao implements OnInit {
       this.buscaDoador = dados.nome_doador;
       this.doadorSelecionado = { id: dados.id_doador, nome: dados.nome_doador };
       this.instituicaoSelecionada = dados.id_instituicao;
-      this.metodo = dados.id_metodo_pgto;
       this.pedidoEditando = dados.id_pedido;
       localStorage.removeItem('pedido_editar');
       this.cdr.detectChanges();
@@ -99,29 +98,25 @@ export class NovaDoacao implements OnInit {
   }
 
   confirmar() {
-  if (!this.idDoador || !this.instituicaoSelecionada || this.produtosSelecionados.length === 0) {
-    this.mensagem = 'Preencha todos os campos!';
-    return;
-  }
-
-  const metodoInt = Number(this.metodo);
-  this.pagamentoService.confirmar(metodoInt).subscribe();
-
-  const id_produtos: number[] = [];
-  this.produtosSelecionados.forEach((p: any) => {
-    for (let q = 0; q < p.quantidade; q++) {
-      id_produtos.push(p.id);
+    if (!this.idDoador || !this.instituicaoSelecionada || this.produtosSelecionados.length === 0) {
+      this.mensagem = 'Preencha todos os campos!';
+      return;
     }
-  });
 
-  this.pedidoService.criar({
-    id_doador: Number(this.idDoador),
-    id_produtos: id_produtos,
-    id_instituicao: Number(this.instituicaoSelecionada),
-    id_metodo_pgto: metodoInt
-  }).subscribe({
-    next: () => this.mensagem = 'Doação realizada com sucesso! ❤️',
-    error: (err: any) => this.mensagem = 'Erro: ' + (err.error?.error || 'Tente novamente.')
-  });
-}
+    const id_produtos: number[] = [];
+    this.produtosSelecionados.forEach((p: any) => {
+      for (let q = 0; q < p.quantidade; q++) {
+        id_produtos.push(p.id);
+      }
+    });
+
+    localStorage.setItem('pedido_pendente', JSON.stringify({
+      id_doador: Number(this.idDoador),
+      id_produtos: id_produtos,
+      id_instituicao: Number(this.instituicaoSelecionada),
+      total: this.total
+    }));
+
+    this.router.navigate(['/pagamento']);
+  }
 }

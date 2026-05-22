@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class PedidoService {
-  private api = 'http://127.0.0.1:5000';
+  private api = 'http://127.0.0.1:5001';
 
   constructor(private http: HttpClient) {}
 
