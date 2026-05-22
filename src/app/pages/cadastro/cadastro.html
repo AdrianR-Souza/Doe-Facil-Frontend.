@@ -7,27 +7,8 @@
 
   <div class="content">
 
-    @if (!tipo) {
-      <div class="tipo-titulo">Você é:</div>
-      <div class="tipo-cards">
-        <div class="tipo-card" (click)="tipo = 'doador'">
-          <div class="tipo-icon">❤️</div>
-          <div class="tipo-nome">Doador</div>
-          <div class="tipo-sub">Quero fazer doações</div>
-        </div>
-        <div class="tipo-card" (click)="tipo = 'instituicao'">
-          <div class="tipo-icon">🏥</div>
-          <div class="tipo-nome">Instituição</div>
-          <div class="tipo-sub">Quero receber doações</div>
-        </div>
-      </div>
-    }
-
-    @if (tipo === 'doador') {
-      <div class="form-header">
-        <button class="btn-voltar" (click)="tipo = ''">◀ Voltar</button>
-        <h2>Cadastro de Doador</h2>
-      </div>
+    <div class="form-card">
+      <h2>Criar conta de doador</h2>
 
       <div class="form-group">
         <label>Nome completo</label>
@@ -70,49 +51,8 @@
       } @else {
         <button class="btn-confirmar" (click)="cadastrar()">Criar cadastro</button>
       }
-    }
 
-    @if (tipo === 'instituicao') {
-      <div class="form-header">
-        <button class="btn-voltar" (click)="tipo = ''">◀ Voltar</button>
-        <h2>Cadastro de Instituição</h2>
-      </div>
-
-      <div class="form-group">
-        <label>Razão Social</label>
-        <input type="text" [(ngModel)]="instituicao.razao_social" placeholder="Nome jurídico" />
-      </div>
-      <div class="form-group">
-        <label>Nome Fantasia</label>
-        <input type="text" [(ngModel)]="instituicao.nome_fantasia" placeholder="Como é conhecida" />
-      </div>
-      <div class="form-group">
-        <label>CNPJ</label>
-        <input type="number" [(ngModel)]="instituicao.cnpj" placeholder="00000000000000" />
-      </div>
-      <div class="form-group">
-        <label>Contato</label>
-        <input type="text" [(ngModel)]="instituicao.contato" placeholder="(44) 99999-0000" />
-      </div>
-      <div class="form-group">
-        <label>Endereço</label>
-        <input type="text" [(ngModel)]="instituicao.endereco" placeholder="Rua, número, bairro" />
-      </div>
-      <div class="form-group">
-        <label>E-mail</label>
-        <input type="email" [(ngModel)]="instituicao.email" placeholder="contato@instituicao.org" />
-      </div>
-
-      @if (mensagem) {
-        <div class="mensagem" [class.sucesso]="sucesso" [class.erro]="!sucesso">{{ mensagem }}</div>
-      }
-
-      @if (sucesso) {
-        <button class="btn-confirmar" routerLink="/">Voltar ao início</button>
-      } @else {
-        <button class="btn-confirmar" (click)="cadastrar()">Cadastrar instituição</button>
-      }
-    }
+    </div>
 
   </div>
 </div>

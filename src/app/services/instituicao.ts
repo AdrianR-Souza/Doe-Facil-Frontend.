@@ -18,4 +18,8 @@ export class InstituicaoService {
   cadastrar(dados: any) {
     return this.http.post<any>(`${this.api}/instituicoes`, dados);
   }
+
+  deletar(id: number) {
+    return this.http.delete<any>(`${this.api}/instituicoes/${id}`);
+  }
 }

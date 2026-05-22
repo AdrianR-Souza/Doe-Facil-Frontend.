@@ -12,7 +12,6 @@
         <div class="login-icon">🔐</div>
         <h2>Área Restrita</h2>
         <p>Digite a senha para acessar o painel admin</p>
-
         <div class="form-group">
           <label>Senha</label>
           <input
@@ -22,70 +21,114 @@
             (keyup.enter)="entrar()"
           />
         </div>
-
         @if (mensagem) {
           <div class="mensagem erro">{{ mensagem }}</div>
         }
-
         <button class="btn-entrar" (click)="entrar()">Entrar</button>
       </div>
     }
 
     @if (autenticado) {
 
-      <div class="section-title">Adicionar Produto</div>
-
-      <div class="form-group">
-        <label>Nome do produto</label>
-        <input type="text" [(ngModel)]="novoProduto.nome" placeholder="Ex: Arroz 5kg" />
-      </div>
-
-      <div class="form-group">
-        <label>Tipo</label>
-        <select [(ngModel)]="novoProduto.tipo">
-          <option value="perecivel">Perecível</option>
-          <option value="não perecível">Não Perecível</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Tipo de Volume</label>
-        <select [(ngModel)]="novoProduto.tipoVolume">
-          <option value="kg">kg</option>
-          <option value="g">g</option>
-          <option value="l">l</option>
-          <option value="ml">ml</option>
-          <option value="pcto">Pacote</option>
-          <option value="un">Unidade</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Preço (R$)</label>
-        <input type="number" [(ngModel)]="novoProduto.preco" placeholder="0.00" step="0.01" />
-      </div>
-
-      <div class="form-group">
-        <label>Peso/Quantidade</label>
-        <input type="text" [(ngModel)]="novoProduto.peso" placeholder="Ex: 5" />
+      <div class="abas">
+        <button [class.ativa]="abaSelecionada === 'produtos'" (click)="abaSelecionada = 'produtos'">Produtos</button>
+        <button [class.ativa]="abaSelecionada === 'instituicoes'" (click)="abaSelecionada = 'instituicoes'">Instituições</button>
       </div>
 
       @if (mensagem) {
         <div class="mensagem" [class.sucesso]="sucesso" [class.erro]="!sucesso">{{ mensagem }}</div>
       }
 
-      <button class="btn-adicionar" (click)="adicionarProduto()">+ Adicionar Produto</button>
+      @if (abaSelecionada === 'produtos') {
+        <div class="section-title">Adicionar Produto</div>
 
-      <div class="section-title" style="margin-top: 32px;">Produtos Cadastrados</div>
-
-      @for (p of produtos; track p.id) {
-        <div class="produto-item">
-          <div class="produto-info">
-            <div class="produto-nome">{{ p.nome }}</div>
-            <div class="produto-detalhe">{{ p.tipo }} · {{ p.tipoVolume }} · R$ {{ p.preco | number:'1.2-2' }}</div>
-          </div>
-          <button class="btn-deletar" (click)="deletarProduto(p.id)">🗑️</button>
+        <div class="form-group">
+          <label>Nome do produto</label>
+          <input type="text" [(ngModel)]="novoProduto.nome" placeholder="Ex: Arroz 5kg" />
         </div>
+        <div class="form-group">
+          <label>Tipo</label>
+          <select [(ngModel)]="novoProduto.tipo">
+            <option value="perecivel">Perecível</option>
+            <option value="não perecível">Não Perecível</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tipo de Volume</label>
+          <select [(ngModel)]="novoProduto.tipoVolume">
+            <option value="kg">kg</option>
+            <option value="g">g</option>
+            <option value="l">l</option>
+            <option value="ml">ml</option>
+            <option value="pcto">Pacote</option>
+            <option value="un">Unidade</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Preço (R$)</label>
+          <input type="number" [(ngModel)]="novoProduto.preco" placeholder="0.00" step="0.01" />
+        </div>
+        <div class="form-group">
+          <label>Peso/Quantidade</label>
+          <input type="text" [(ngModel)]="novoProduto.peso" placeholder="Ex: 5" />
+        </div>
+
+        <button class="btn-adicionar" (click)="adicionarProduto()">+ Adicionar Produto</button>
+
+        <div class="section-title" style="margin-top: 32px;">Produtos Cadastrados</div>
+
+        @for (p of produtos; track p.id) {
+          <div class="produto-item">
+            <div class="produto-info">
+              <div class="produto-nome">{{ p.nome }}</div>
+              <div class="produto-detalhe">{{ p.tipo }} · {{ p.tipoVolume }} · R$ {{ p.preco | number:'1.2-2' }}</div>
+            </div>
+            <button class="btn-deletar" (click)="deletarProduto(p.id)">🗑️</button>
+          </div>
+        }
+      }
+
+      @if (abaSelecionada === 'instituicoes') {
+        <div class="section-title">Adicionar Instituição</div>
+
+        <div class="form-group">
+          <label>Razão Social</label>
+          <input type="text" [(ngModel)]="novaInstituicao.razao_social" placeholder="Nome jurídico" />
+        </div>
+        <div class="form-group">
+          <label>Nome Fantasia</label>
+          <input type="text" [(ngModel)]="novaInstituicao.nome_fantasia" placeholder="Como é conhecida" />
+        </div>
+        <div class="form-group">
+          <label>CNPJ</label>
+          <input type="number" [(ngModel)]="novaInstituicao.cnpj" placeholder="00000000000000" />
+        </div>
+        <div class="form-group">
+          <label>Contato</label>
+          <input type="text" [(ngModel)]="novaInstituicao.contato" placeholder="(44) 99999-0000" />
+        </div>
+        <div class="form-group">
+          <label>Endereço</label>
+          <input type="text" [(ngModel)]="novaInstituicao.endereco" placeholder="Rua, número, bairro" />
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" [(ngModel)]="novaInstituicao.email" placeholder="contato@instituicao.org" />
+        </div>
+
+        <button class="btn-adicionar" (click)="adicionarInstituicao()">+ Adicionar Instituição</button>
+
+        <div class="section-title" style="margin-top: 32px;">Instituições Cadastradas</div>
+
+        @for (i of instituicoes; track i.id) {
+          <div class="produto-item">
+            <div class="produto-info">
+              <div class="produto-nome">{{ i.nome_fantasia }}</div>
+              <div class="produto-detalhe">{{ i.razao_social }} · {{ i.email }}</div>
+            </div>
+            <button class="btn-deletar" (click)="deletarInstituicao(i.id)">🗑️</button>
+          </div>
+        }
       }
 
     }

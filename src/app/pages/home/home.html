@@ -1,5 +1,6 @@
 <div class="page">
 
+  <!-- OVERLAY DO MENU -->
   @if (menuAberto) {
     <div class="overlay" (click)="menuAberto = false"></div>
   }
@@ -29,6 +30,12 @@
       <div class="menu-item-lateral" (click)="navegarPara('/faq')">
         <span>❓</span><span>FAQ</span>
       </div>
+
+      <div class="menu-admin">
+        <div class="menu-item-lateral" (click)="navegarPara('/admin')">
+          <span>🔐</span><span>Admin</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -40,7 +47,7 @@
     </div>
 
     <div class="hero-text">
-      <p class="bem-vindo"></p>
+
       <h1>DOE + FÁCIL</h1>
     </div>
 

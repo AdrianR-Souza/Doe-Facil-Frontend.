@@ -43,6 +43,7 @@
 .hero-text {
   text-align: center;
   margin-bottom: 24px;
+  margin-top: 25px;
 }
 
 .bem-vindo {
@@ -256,4 +257,14 @@ h1 {
 
 .menu-item-lateral span:first-child {
   font-size: 20px;
+}
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.menu-admin {
+  margin-top: auto;
+  border-top: 1px solid #333;
 }

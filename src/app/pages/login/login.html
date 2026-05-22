@@ -1,0 +1,45 @@
+<div class="page">
+
+  <div class="hero">
+    <div class="logo">doe + fácil</div>
+    <div class="hero-sub">Faça login para continuar</div>
+  </div>
+
+  <div class="content">
+
+    <div class="form-card">
+      <h2>Entrar na conta</h2>
+
+      <div class="form-group">
+        <label>E-mail</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          placeholder="seu@email.com"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>4 últimos dígitos do telefone</label>
+        <input
+          type="text"
+          [(ngModel)]="ultimosDigitos"
+          placeholder="Ex: 0542"
+          maxlength="4"
+          (keyup.enter)="entrar()"
+        />
+      </div>
+
+      @if (mensagem) {
+        <div class="mensagem erro">{{ mensagem }}</div>
+      }
+
+      <button class="btn-entrar" (click)="entrar()">Entrar</button>
+
+      <div class="cadastro-link" routerLink="/cadastro">
+        Não tem conta? <span>Cadastre-se aqui</span>
+      </div>
+    </div>
+
+  </div>
+</div>

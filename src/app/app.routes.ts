@@ -9,6 +9,8 @@ import { Suporte } from './pages/suporte/suporte';
 import { Faq } from './pages/faq/faq';
 import { Cadastro } from './pages/cadastro/cadastro';
 import { Admin } from './pages/admin/admin';
+import { Login } from './pages/login/login';
+
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -21,5 +23,7 @@ export const routes: Routes = [
   { path: 'faq', component: Faq },
   { path: 'cadastro', component: Cadastro },
   { path: 'admin', component: Admin },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
+  { path: 'login', component: Login }
+
 ];
