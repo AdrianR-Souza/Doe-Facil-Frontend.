@@ -1,0 +1,242 @@
+<div class="page">
+
+  @if (menuAberto) {
+    <div class="overlay" (click)="menuAberto = false"></div>
+  }
+
+  <div class="menu-lateral" [class.aberto]="menuAberto">
+    <div class="menu-topo">
+      <span class="menu-titulo">{{ instituicaoLogada?.nome_fantasia ?? 'Menu' }}</span>
+      <span class="menu-fechar" (click)="menuAberto = false">✕</span>
+    </div>
+    <div class="menu-items">
+      <div class="menu-item-lateral" (click)="menuAberto = false; verEstoque = false; verDoacoes = false; verPerfil = false; verNotificacoes = false">
+        <span>🏠</span><span>Painel</span>
+      </div>
+      <div class="menu-item-lateral" (click)="menuAberto = false; verEstoque = true; verDoacoes = false; verPerfil = false; verNotificacoes = false">
+        <span>📦</span><span>Estoque</span>
+      </div>
+      <div class="menu-item-lateral" (click)="menuAberto = false; verDoacoes = true; verEstoque = false; verPerfil = false; verNotificacoes = false">
+        <span>❤️</span><span>Doações Recebidas</span>
+      </div>
+      <div class="menu-item-lateral" (click)="menuAberto = false; verPerfil = true; verEstoque = false; verDoacoes = false; verNotificacoes = false">
+        <span>👤</span><span>Perfil</span>
+      </div>
+      <div class="menu-item-lateral" (click)="menuAberto = false; verNotificacoes = true; verEstoque = false; verDoacoes = false; verPerfil = false">
+        <span>🔔</span><span>Notificações</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+  <span (click)="router.navigate(['/'])" style="cursor:pointer">◀</span>
+  <h1>{{ instituicaoLogada ? 'Meu painel' : 'Área da Instituição' }}</h1>
+  @if (instituicaoLogada) {
+    <span (click)="menuAberto = true" style="cursor:pointer">☰</span>
+  } @else {
+    <span></span>
+  }
+</header>
+
+  <div class="content">
+
+    @if (!instituicaoLogada) {
+      <div class="login-card">
+        <div class="login-icon">🏥</div>
+        <h2>Área da Instituição</h2>
+        <p>Acesse o painel da sua ONG</p>
+
+        <div class="form-group">
+          <label>E-mail</label>
+          <input
+            type="email"
+            [(ngModel)]="email"
+            placeholder="ong@exemplo.com.br"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Senha (4 últimos dígitos do CNPJ)</label>
+          <input
+            type="password"
+            [(ngModel)]="senha"
+            placeholder="••••"
+            maxlength="4"
+            (keyup.enter)="entrar()"
+          />
+        </div>
+
+        @if (mensagem) {
+          <div class="mensagem erro">{{ mensagem }}</div>
+        }
+
+        <button class="btn-entrar" (click)="entrar()">Entrar</button>
+
+        <div class="divisor">ou</div>
+
+        <div class="cadastro-card" (click)="mostrarCadastro = !mostrarCadastro">
+          <div class="cadastro-titulo">Cadastrar Instituição</div>
+          <div class="cadastro-sub">Ainda não está cadastrado? Fale conosco</div>
+        </div>
+
+        @if (mostrarCadastro) {
+          <div class="email-card">
+            <div class="email-icon">✉️</div>
+            <div class="email-titulo">Entre em contato:</div>
+            <div class="email-sub">cadastroinstituicoes&#64;doefacil.com</div>
+          </div>
+        }
+      </div>
+    }
+
+    @if (instituicaoLogada && !verEstoque && !verDoacoes && !verPerfil && !verNotificacoes) {
+
+      <div class="total-card">
+        <div class="total-label">Total recebido</div>
+        <div class="total-valor">R$ {{ totalRecebido | number:'1.2-2' }}</div>
+        <div class="total-sub">{{ pedidos.length }} doações recebidas</div>
+      </div>
+
+      <div class="estoque-card" (click)="verEstoque = true">
+        <div class="estoque-icon">📦</div>
+        <div class="estoque-titulo">Estoque</div>
+        <div class="estoque-valor">{{ totalItens }} itens</div>
+      </div>
+
+      <div class="doacoes-titulo">Últimas doações</div>
+
+      @if (pedidos.length === 0) {
+        <div class="empty">
+          <p>Nenhuma doação recebida ainda.</p>
+        </div>
+      }
+
+      @for (p of pedidos; track p.id) {
+        <div class="doacao-item">
+          <div class="doacao-info">
+            <div class="doacao-doador">{{ getNomeDoador(p.id_doador) }}</div>
+            <div class="doacao-produtos">{{ getNomeProdutos(p) }}</div>
+          </div>
+          <div class="doacao-valor">R$ {{ getTotalPedido(p) | number:'1.2-2' }}</div>
+        </div>
+      }
+
+      <button class="btn-sair" (click)="instituicaoLogada = null">Sair</button>
+    }
+
+    @if (verEstoque) {
+      <div class="estoque-lista">
+        <div class="estoque-header">Total em estoque — {{ totalItens }} itens</div>
+        @for (item of getEstoque(); track item.nome) {
+          <div class="estoque-item">
+            <div class="estoque-item-info">
+              <div class="estoque-item-nome">{{ item.nome }}</div>
+              <div class="estoque-item-qtd">{{ item.quantidade }} unidades</div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    @if (verDoacoes) {
+      <div class="doacoes-section">
+        <div class="doacoes-header">
+          <span (click)="verDoacoes = false" style="cursor:pointer">◀</span>
+          <h2>Doações recebidas</h2>
+        </div>
+        <div class="busca">
+          <input
+            type="text"
+            [(ngModel)]="buscaDoacoes"
+            placeholder="Buscar doador ou alimento"
+          />
+        </div>
+        @for (p of pedidosFiltrados; track p.id) {
+          <div class="doacao-card">
+            <div class="doacao-card-info">
+              <div class="doacao-card-doador">{{ getNomeDoador(p.id_doador) }}</div>
+              <div class="doacao-card-produtos">{{ getNomeProdutos(p) }}</div>
+            </div>
+            <div class="doacao-card-direita">
+              <span class="badge-recebido">RECEBIDO</span>
+              <div class="doacao-card-valor">R$ {{ getTotalPedido(p) | number:'1.2-2' }}</div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    @if (verPerfil) {
+      <div class="perfil-section">
+        <div class="perfil-topo">
+          <div class="perfil-avatar">{{ instituicaoLogada.nome_fantasia[0] }}</div>
+          <div class="perfil-nome">{{ instituicaoLogada.nome_fantasia }}</div>
+          <div class="perfil-email">{{ instituicaoLogada.email }}</div>
+        </div>
+
+        <div class="form-group">
+          <label>Nome completo</label>
+          <input type="text" [(ngModel)]="instituicaoLogada.nome_fantasia" [disabled]="!editandoPerfil" />
+        </div>
+        <div class="form-group">
+          <label>CNPJ</label>
+          <input type="text" [(ngModel)]="instituicaoLogada.cnpj" [disabled]="!editandoPerfil" />
+        </div>
+        <div class="form-group">
+          <label>Telefone</label>
+          <input type="text" [(ngModel)]="instituicaoLogada.contato" [disabled]="!editandoPerfil" />
+        </div>
+        <div class="form-group">
+          <label>Endereço</label>
+          <input type="text" [(ngModel)]="instituicaoLogada.endereco" [disabled]="!editandoPerfil" />
+        </div>
+
+        @if (mensagemPerfil) {
+          <div class="mensagem sucesso">{{ mensagemPerfil }}</div>
+        }
+
+        @if (!editandoPerfil) {
+          <button class="btn-entrar" (click)="editandoPerfil = true">✏️ Editar perfil</button>
+        } @else {
+          <button class="btn-entrar" (click)="salvarPerfil()">Salvar alterações</button>
+          <button class="btn-sair" (click)="editandoPerfil = false">Cancelar</button>
+        }
+      </div>
+    }
+
+    @if (verNotificacoes) {
+      <div class="notif-section">
+        <div class="doacoes-header">
+          <span (click)="verNotificacoes = false" style="cursor:pointer">◀</span>
+          <h2>Notificação</h2>
+        </div>
+
+        @if (pedidos.length === 0) {
+          <div class="empty"><p>Nenhuma notificação.</p></div>
+        }
+
+        @for (p of pedidos; track p.id) {
+          <div class="notif-item">
+            <div class="notif-icon-circle vermelho">🧡</div>
+            <div class="notif-info">
+              <div class="notif-texto">
+                <strong>{{ getNomeDoador(p.id_doador) }}</strong> fez doação de <strong>R$ {{ getTotalPedido(p) | number:'1.2-2' }}</strong>
+              </div>
+              <div class="notif-data">Pedido #{{ p.id }}</div>
+            </div>
+          </div>
+        }
+
+        <div class="notif-item">
+          <div class="notif-icon-circle verde">✅</div>
+          <div class="notif-info">
+            <div class="notif-texto">Sua ONG foi <strong>verificada</strong> com sucesso</div>
+            <div class="notif-data">Ao se cadastrar</div>
+          </div>
+        </div>
+
+      </div>
+    }
+
+  </div>
+</div>

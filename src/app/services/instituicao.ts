@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class InstituicaoService {
-  private api = 'http://127.0.0.1:5001';
+  private api = 'http://127.0.0.1:5000';
 
   constructor(private http: HttpClient) {}
 
@@ -22,4 +22,7 @@ export class InstituicaoService {
   deletar(id: number) {
     return this.http.delete<any>(`${this.api}/instituicoes/${id}`);
   }
+  atualizar(id: number, dados: any) {
+  return this.http.put<any>(`${this.api}/instituicoes/${id}`, dados);
+}
 }

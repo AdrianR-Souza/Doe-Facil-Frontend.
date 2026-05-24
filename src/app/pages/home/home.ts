@@ -14,6 +14,9 @@ export class Home implements OnInit {
   totalDoacoes: number = 0;
   totalOngs: number = 0;
   menuAberto: boolean = false;
+  instituicoes: any[] = [];
+  ongSelecionada: any = null;
+  verOngs: boolean = false;
 
   constructor(
     private instituicaoService: InstituicaoService,
@@ -25,6 +28,7 @@ export class Home implements OnInit {
   ngOnInit() {
     this.instituicaoService.listar().subscribe((data: any[]) => {
       this.totalOngs = data.length;
+      this.instituicoes = data;
       this.cdr.detectChanges();
     });
     this.pedidoService.listar().subscribe((data: any[]) => {

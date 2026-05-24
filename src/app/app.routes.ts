@@ -6,11 +6,10 @@ import { NovaDoacao } from './pages/nova-doacao/nova-doacao';
 import { Pagamento } from './pages/pagamento/pagamento';
 import { Perfil } from './pages/perfil/perfil';
 import { Suporte } from './pages/suporte/suporte';
-import { Faq } from './pages/faq/faq';
 import { Cadastro } from './pages/cadastro/cadastro';
 import { Admin } from './pages/admin/admin';
 import { Login } from './pages/login/login';
-
+import { Instituicao } from './pages/instituicao/instituicao';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -20,10 +19,9 @@ export const routes: Routes = [
   { path: 'pagamento', component: Pagamento },
   { path: 'perfil', component: Perfil },
   { path: 'suporte', component: Suporte },
-  { path: 'faq', component: Faq },
   { path: 'cadastro', component: Cadastro },
   { path: 'admin', component: Admin },
-  { path: '**', redirectTo: '' },
-  { path: 'login', component: Login }
-
+  { path: 'login', component: Login },
+  { path: 'instituicao', component: Instituicao },
+  { path: '**', redirectTo: '' }
 ];

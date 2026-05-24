@@ -24,11 +24,14 @@
       <div class="menu-item-lateral" (click)="navegarPara('/cadastro')">
         <span>📝</span><span>Cadastro</span>
       </div>
+      <div class="menu-item-lateral" (click)="navegarPara('/instituicao')">
+        <span>🏥</span><span>Área da Instituição</span>
+      </div>
+      <div class="menu-item-lateral" (click)="menuAberto = false; verOngs = true">
+        <span>🤝</span><span>ONGs Parceiras</span>
+      </div>
       <div class="menu-item-lateral" (click)="navegarPara('/suporte')">
         <span>🎧</span><span>Suporte</span>
-      </div>
-      <div class="menu-item-lateral" (click)="navegarPara('/faq')">
-        <span>❓</span><span>FAQ</span>
       </div>
 
       <div class="menu-admin">
@@ -47,7 +50,7 @@
     </div>
 
     <div class="hero-text">
-
+      <p class="bem-vindo">Bem-Vindo</p>
       <h1>DOE + FÁCIL</h1>
     </div>
 
@@ -78,6 +81,7 @@
       </div>
     </div>
 
+
     <div class="ajude-card" routerLink="/alimentos">
       <div class="ajude-icon">👥</div>
       <div class="ajude-titulo">Ajude quem mais precisa</div>
@@ -86,4 +90,48 @@
     </div>
 
   </div>
+
+  @if (verOngs) {
+    <div class="overlay" (click)="verOngs = false"></div>
+    <div class="ongs-panel">
+      <div class="ongs-header">
+        <span (click)="verOngs = false" style="cursor:pointer">✕</span>
+        <h2>ONGs Parceiras</h2>
+      </div>
+
+      @if (!ongSelecionada) {
+        @for (i of instituicoes; track i.id) {
+          <div class="ong-item" (click)="ongSelecionada = i">
+            <div class="ong-avatar">{{ i.nome_fantasia[0] }}</div>
+            <div class="ong-info">
+              <div class="ong-nome">{{ i.nome_fantasia }}</div>
+              <div class="ong-razao">{{ i.razao_social }}</div>
+            </div>
+            <span>›</span>
+          </div>
+        }
+      }
+
+      @if (ongSelecionada) {
+        <div class="ong-detalhe">
+          <div class="ong-detalhe-avatar">{{ ongSelecionada.nome_fantasia[0] }}</div>
+          <div class="ong-detalhe-nome">{{ ongSelecionada.nome_fantasia }}</div>
+          <div class="ong-detalhe-razao">{{ ongSelecionada.razao_social }}</div>
+
+          <div class="ong-detalhe-item">
+            <span>📍</span><span>{{ ongSelecionada.endereco }}</span>
+          </div>
+          <div class="ong-detalhe-item">
+            <span>✉️</span><span>{{ ongSelecionada.email }}</span>
+          </div>
+          <div class="ong-detalhe-item">
+            <span>📞</span><span>{{ ongSelecionada.contato }}</span>
+          </div>
+
+          <button class="btn-voltar-ong" (click)="ongSelecionada = null">◀ Voltar</button>
+        </div>
+      }
+    </div>
+  }
+
 </div>
