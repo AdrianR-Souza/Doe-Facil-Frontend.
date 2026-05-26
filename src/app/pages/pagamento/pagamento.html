@@ -33,14 +33,8 @@
         </div>
       </div>
 
-      @if (metodoSelecionado === 1) {
-        <div class="qrcode">
-          <div class="qrcode-box">QR Code PIX</div>
-          <button class="btn-copiar" (click)="confirmar()">Copiar QR Code</button>
-        </div>
-      }
-
-      @if (metodoSelecionado === 2 || metodoSelecionado === 3) {
+      
+      @if (metodoSelecionado === 1 || metodoSelecionado === 2 || metodoSelecionado === 3) {
         <button class="btn-confirmar" (click)="confirmar()">Confirmar pagamento</button>
       }
 
